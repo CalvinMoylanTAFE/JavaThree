@@ -23,15 +23,15 @@ class BinaryTree {
         add(rootValue);
     }
 
-    private Node addRecursive(Node node, String valueToFind) {
+    private Node addNode(Node node, String valueToFind) {
         if (node == null) {
             return new Node(valueToFind);
         }
 
         if (valueToFind.compareTo(node.Value) < 0) {
-            node.left = addRecursive(node.left, valueToFind);
+            node.left = addNode(node.left, valueToFind);
         } else if (valueToFind.compareTo(node.Value) > 0) {
-            node.right = addRecursive(node.right, valueToFind);
+            node.right = addNode(node.right, valueToFind);
         } else {
             return node;
         }
@@ -39,7 +39,7 @@ class BinaryTree {
         return node;
     }
 
-    private Node removeRecursive(Node node, String valueToFind) {
+    private Node removeNode(Node node, String valueToFind) {
         if (node == null) {
             return null;
         }
@@ -56,15 +56,15 @@ class BinaryTree {
             } else {
                 String value = findSmallest(node.right);
                 node.Value = value;
-                node.right = removeRecursive(node.right, value);
+                node.right = removeNode(node.right, value);
                 return node;
             }
         } else if (valueToFind.compareTo(node.Value) < 0) {
-            node.left = removeRecursive(node.left, valueToFind);
+            node.left = removeNode(node.left, valueToFind);
             return node;
         }
 
-        node.right = removeRecursive(node.right, valueToFind);
+        node.right = removeNode(node.right, valueToFind);
         return node;
     }
 
@@ -111,11 +111,11 @@ class BinaryTree {
     }
 
     public void remove(String valueToFind) {
-        root = removeRecursive(root, valueToFind);
+        root = removeNode(root, valueToFind);
     }
 
     public void add(String valueToFind) {
-        root = addRecursive(root, valueToFind);
+        root = addNode(root, valueToFind);
     }
 
 }
